@@ -2,7 +2,7 @@
 #define JSON_ERRORS_H
 #include <iostream>
 
-class Json_errors: public std::exception { // выкидывать исключения
+class Json_errors: public std::exception {
 private:
     mutable std::string error_message;
     std::string info;

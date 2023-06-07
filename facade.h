@@ -7,7 +7,7 @@
 
 class Facade {
 private:
-    Work_with_file file_worker; // памагииииииитее нужно хранить имя файла только тута не в главном окне точка аш
+    Work_with_file file_worker;
     Json_checker json_cheker;
 public:
     std::string fp;
