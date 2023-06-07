@@ -1,7 +1,7 @@
 #include "work_with_file.h"
 
 void Work_with_file::read_file(const std::string& filename) {
-    std::ifstream fs; // работа с файлом на чтение
+    std::ifstream fs;
     fs.open(filename);
     if (!fs.is_open()) {
         throw System_errors("File was not opened");
