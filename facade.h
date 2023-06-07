@@ -13,6 +13,7 @@ public:
     std::string fp;
     std::string read_operation(const std::string& fp);
     void check_operation(const std::string& ft);
+    void rollback(){json_cheker.rollback();}
 };
 
 #endif // FACADE_H

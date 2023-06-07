@@ -50,5 +50,6 @@ void MainWindow::on_check_file_clicked() {
         const char* system_error = errors.what();
         ui->check_result_label->setText(system_error);
     }
+    facade.rollback();
 }
 

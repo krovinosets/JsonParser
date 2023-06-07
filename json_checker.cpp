@@ -1,10 +1,15 @@
 #include "json_checker.h"
+#include <QDebug>
 
 #define ERROR_IN_STRING "incorrect string"
 #define ERROR_IN_SPECIAL "incorrect special type"
 #define ERROR_IN_NUMBER "incorrect number"
 
 Json_checker::Json_checker() {
+    rollback();
+}
+
+void Json_checker::rollback() {
     this->string_index = 0;
     this->pos_in_file = 1;
     this->pos_in_line = 1;
@@ -75,7 +80,14 @@ void Json_checker::check_special_type(const std::string& json_text) {
 void Json_checker::check_number(const std::string& json_text) {
     int count_of_points = 0;
     int count_of_minus = 0;
+    std::string prev;
     while (correct_symbols.find(json_text[string_index]) != std::string::npos) {
+        if(!prev.empty() && ((prev + json_text[string_index]) == ".-" || (prev + json_text[string_index]) == "-.")){
+            is_okay = false;
+            throw Json_errors("incorrect number", "number with correct signs", pos_in_file, pos_in_line);
+            break;
+        }
+
         if (json_text[string_index] == '.')
             count_of_points++;
         if (count_of_points > 1) {
@@ -90,6 +102,7 @@ void Json_checker::check_number(const std::string& json_text) {
             throw Json_errors("incorrect number", "number with one minus", pos_in_file, pos_in_line);
             break;
         }
+        prev = json_text[string_index];
         string_index++;
         pos_in_line++;
     }
@@ -108,7 +121,7 @@ void Json_checker::check_array(const std::string& json_text) {
         pos_in_line++;
         return;
     }
-    while (json_text[string_index] && is_okay == true) {
+    while (json_text[string_index] && is_okay) {
         skip_empty_space(json_text);
         if (!expect_value && json_text[string_index] == ']')
             break;
@@ -220,7 +233,6 @@ void Json_checker::check_object(const std::string& json_text) {
         else {
             is_okay = false;
             throw Json_errors("incorrect object", part.current, pos_in_file, pos_in_line);
-
         }
     }
     if (is_okay == false)

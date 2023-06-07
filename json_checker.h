@@ -25,6 +25,7 @@ private:
 public:
     Json_checker();
     Json_checker(const std::string& json_txt);
+    void rollback();
     void check_json(const std::string &json_text);
     std::string assign_error();
 };
