@@ -9,7 +9,6 @@
 class Json_checker {
 private:
     std::string error_message;
-private:
     std::string json_text;
     std::string correct_symbols = "-.0123456789";
     int string_index;
@@ -30,11 +29,13 @@ public:
     std::string assign_error();
 };
 
+class Json_checker2: Json_checker {
+};
+
 class Expected_part
 {
 public:
     std::string current;
-public:
     std::string key = "ключ";
     std::string colon = "двоеточие";
     std::string value = "значение";

@@ -7,13 +7,20 @@
 
 class Facade {
 private:
-    Work_with_file file_worker;
-    Json_checker json_cheker;
+    Work_with_file *file_worker;
+    Json_checker *json_cheker;
 public:
+    Facade(Work_with_file *wf, Json_checker *jc);
+    ~Facade(){
+        if(file_worker != nullptr)
+            delete file_worker;
+        if(json_cheker != nullptr)
+            delete json_cheker;
+    }
     std::string fp;
     std::string read_operation(const std::string& fp);
     void check_operation(const std::string& ft);
-    void rollback(){json_cheker.rollback();}
+    void rollback(){json_cheker->rollback();}
 };
 
 #endif // FACADE_H

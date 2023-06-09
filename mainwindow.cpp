@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    facade = Facade(new Work_with_file(), new Json_checker2());
     ui->setupUi(this);
     connect(ui->open_file_btn, &QPushButton::clicked, this, &MainWindow::on_open_file_clicked);
     connect(ui->check_file_btn, &QPushButton::clicked, this, &MainWindow::on_check_file_clicked);
@@ -28,12 +29,10 @@ void MainWindow::on_open_file_clicked() {
         ui->json_label->setText(QString::fromStdString(res));
 
         QLabel *outputForm = ui->json_label;
-        qDebug() << outputForm->height();
         QWidget *sawc = ui->scrollAreaWidgetContents;
         int cal = outputForm->text().count("\n")*29;
         sawc->setMinimumHeight(cal);
         outputForm->setGeometry(outputForm->x(), outputForm->y(), outputForm->width(), cal);
-        qDebug() << outputForm->height();
     }
 }
 

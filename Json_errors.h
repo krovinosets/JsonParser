@@ -13,8 +13,8 @@ private:
         error_message = message;
     }
 public:
-    Json_errors(const std::string& info, const std::string& expected_str, const int pos_in_file, const int pos_in_line):
-        info{info}, expected_str{expected_str}, pos_in_file{pos_in_file}, pos_in_line{pos_in_line}{}
+    explicit Json_errors(const std::string& info, const std::string& expected_str, const int pos_in_file, const int pos_in_line):
+        std::exception(), info{info}, expected_str{expected_str}, pos_in_file{pos_in_file}, pos_in_line{pos_in_line}{}
     const char* what() const noexcept {
         std::string message = "Error: " + info + " in position: " + std::to_string(pos_in_file) + ", " + std::to_string(pos_in_line) + ". " + "Expected: " + expected_str + " .";
         set_error_message(message);

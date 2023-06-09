@@ -156,7 +156,7 @@ void Json_checker::check_array(const std::string& json_text) {
         }
         else if (!expect_value && json_text[string_index] != ',') {
             is_okay = false;
-            throw Json_errors("incorrect array", "\",\"", pos_in_file, pos_in_line);
+            throw Json_errors("incorrect array", "]", pos_in_file, pos_in_line);
         }
         else {
             is_okay = false;
