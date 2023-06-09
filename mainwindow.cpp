@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    facade = Facade(new Work_with_file(), new Json_checker2());
+    facade = Facade(new Work_with_file(), new Json_checker());
     ui->setupUi(this);
     connect(ui->open_file_btn, &QPushButton::clicked, this, &MainWindow::on_open_file_clicked);
     connect(ui->check_file_btn, &QPushButton::clicked, this, &MainWindow::on_check_file_clicked);

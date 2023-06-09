@@ -29,9 +29,6 @@ public:
     std::string assign_error();
 };
 
-class Json_checker2: Json_checker {
-};
-
 class Expected_part
 {
 public:
